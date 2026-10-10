@@ -680,6 +680,20 @@ std::vector<HelpPrompt> ISimpleGameListView::getHelpPrompts()
 {
 	std::vector<HelpPrompt> prompts;
 
+	// VR / laser-pointer mode (MouseSelectOnly): the help bar is a row of clickable buttons and there is no keyboard
+	// or gamepad. Keep only OPTIONS and BACK, and replace "GAME OPTIONS (HOLD)" by a real LAUNCH button.
+	// (MENU is appended afterwards by ViewController::getHelpPrompts.)
+	if (Settings::getInstance()->getBool("MouseSelectOnly"))
+	{
+		prompts.push_back(HelpPrompt(BUTTON_BACK, _("BACK"), [&] { goBack(); }));
+		prompts.push_back(HelpPrompt(BUTTON_OK, _("LAUNCH"), [&] { launchSelectedGame(); }));
+
+		if (!UIModeController::getInstance()->isUIModeKid())
+			prompts.push_back(HelpPrompt("select", _("OPTIONS"), [&] { showGamelistOptions(); }));
+
+		return prompts;
+	}
+
 	if (Renderer::getScreenProportion() > 1.4)
 	{
 		if (mPopupSelfReference == nullptr && Settings::getInstance()->getBool("QuickSystemSelect") && getQuickSystemSelectLeftButton() == "left")
@@ -753,7 +767,13 @@ bool ISimpleGameListView::onAction(const std::string& action)
 
 	if (action == "gameoptions")
 	{
-		showSelectedGameOptions();
+		// VR / laser-pointer mode (MouseSelectOnly): a click on the themed top area (video, fanart, description)
+		// launches the game instead of opening Game Options (those are still reachable by holding a click on the game).
+		if (Settings::getInstance()->getBool("MouseSelectOnly"))
+			launchSelectedGame();
+		else
+			showSelectedGameOptions();
+
 		return true;
 	}
 

@@ -1,7 +1,8 @@
 # VR mouse mode (laser pointer / thumbstick-as-wheel)
 
 This build of EmulationStation adds two optional settings for VR streamers
-(Virtual Desktop, Steam Link, Air Link...) that show the desktop and emulate a mouse.
+(Virtual Desktop, Steam Link, Air Link...) that show the desktop and emulate a mouse
+(trigger/A = left click, B = right click, thumbstick = wheel).
 Both are OFF by default, so nothing changes unless you enable them.
 
 Add these two lines to `es_settings.cfg` (in the `.emulationstation` folder of your Retrobat),
@@ -14,7 +15,13 @@ with ES closed:
 
 - `MouseWheelStepMs` (default 0 = off): every wheel event becomes a single step, accepted at most
   once per N milliseconds. 150-200 is a good start. Lower = faster scrolling.
-- `MouseSelectOnly` (default false): a left click only selects a game, it never launches it.
-  Launch with Enter (the A button if your streamer maps it so); right click stays "back".
+- `MouseSelectOnly` (default false): VR mode for the game list.
+  - A left click on a game only **selects** it, it never launches it.
+  - The bottom help bar is reduced to **OPTIONS, MENU, BACK and LAUNCH** (all clickable).
+    LAUNCH replaces "GAME OPTIONS (HOLD)" and starts the selected game.
+  - A click on the themed top area (video / fanart / description), which normally opens
+    "Game Options", **launches the game** instead.
+  - Game Options are still reachable by holding a click on a game in the list.
+  - Right click stays "back".
 
 To go back to stock behaviour, remove the two lines (or set 0 / false).
