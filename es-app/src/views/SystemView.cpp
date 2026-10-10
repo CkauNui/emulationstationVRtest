@@ -1560,19 +1560,6 @@ bool SystemView::hitTest(int x, int y, Transform4x4f& parentTransform, std::vect
 
 bool SystemView::onMouseClick(int button, bool pressed, int x, int y)
 {
-	// VR mouse mode: this fallback is only reached for clicks outside the carousel
-	// (the carousel is hit-tested before the view itself), so a left click on the
-	// artwork / video / description area enters the selected system.
-	if (button == 1 && Settings::getInstance()->getBool("MouseSelectOnly") && !mCarousel.isMouseOver())
-	{
-		if (!pressed)
-		{
-			mCarousel.stopScrolling();
-			ViewController::get()->goToGameList(getSelected());
-		}
-		return true;
-	}
-
 	if (mCarousel.onMouseClick(button, pressed, x, y))
 		return true;
 
