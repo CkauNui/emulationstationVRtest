@@ -1,4 +1,5 @@
 #include "guis/GuiUpdate.h"
+#include <chrono>
 #include "guis/GuiMsgBox.h"
 #include "Window.h"
 #include <string>

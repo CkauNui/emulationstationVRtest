@@ -1,4 +1,5 @@
 #include "ThreadedHasher.h"
+#include <chrono>
 #include "Window.h"
 #include "FileData.h"
 #include "components/AsyncNotificationComponent.h"
