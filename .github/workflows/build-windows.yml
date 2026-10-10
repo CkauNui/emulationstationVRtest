@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
@@ -24,11 +24,9 @@ jobs:
       # from batocera-emulationstation-win32-dependencies on its own (FetchContent).
       - name: Configure
         shell: pwsh
-        run: >
-          cmake -S . -B build
-          -G "Visual Studio 17 2022" -A ${{ matrix.platform }}
-          -DRETROBAT=ON
-          -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+        # No -G on purpose: CMake picks the Visual Studio installed on the runner.
+        # The -D values are quoted because PowerShell would otherwise cut "3.5" at the dot.
+        run: cmake -S . -B build -A ${{ matrix.platform }} "-DRETROBAT=ON" "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 
       - name: Build
         shell: pwsh
