@@ -43,9 +43,6 @@ enum class CarouselType : unsigned int
 class CarouselItemTemplate : public GuiComponent
 {
 public:
-	// System view: a click without drag enters the system even in VR (MouseSelectOnly) mode
-	void setClickAlwaysEnters(bool value) { mClickAlwaysEnters = value; }
-
 	CarouselItemTemplate(const std::string& name, Window* window);
 
 	void loadFromString(const std::string& xml, std::map<std::string, std::string>* map = nullptr);
@@ -67,6 +64,8 @@ private:
 class CarouselComponent : public IList<CarouselComponentData, IBindable*>
 {
 public:
+	// System view: a click without drag enters the system even in VR (MouseSelectOnly) mode
+	void setClickAlwaysEnters(bool value) { mClickAlwaysEnters = value; }
 	CarouselComponent(Window* window);
 	~CarouselComponent();
 
