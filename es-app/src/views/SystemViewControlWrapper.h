@@ -92,6 +92,7 @@ public:
 	bool onMouseClick(int button, bool pressed, int x, int y) { return mComp->onMouseClick(button, pressed, x, y); }
 	void onMouseMove(int x, int y) { mComp->onMouseMove(x, y); }
 	bool onMouseWheel(int delta) { return mComp->onMouseWheel(delta); }
+	bool isMouseOver() { return mComp != nullptr && mComp->isMouseOver(); }
 	bool hitTest(int x, int y, Transform4x4f& parentTransform, std::vector<GuiComponent*>* pResult) { return mComp->hitTest(x, y, parentTransform, pResult); }
 	void applyTheme(const std::shared_ptr<ThemeData>& theme, const std::string& view, const std::string& element, unsigned int properties) { mComp->applyTheme(theme, view, element, properties); }
 	bool finishAnimation(unsigned char slot) { return mComp->finishAnimation(slot); }
