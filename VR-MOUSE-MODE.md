@@ -25,5 +25,7 @@ with ES closed:
   - Right click stays "back".
   - On the system carousel the help bar shows only SELECT and NAVIGATION BAR
     (SEARCH/RANDOM, RANDOM and CHOOSE are hidden).
+    A left click anywhere outside the system carousel (artwork / video / description area)
+    enters the selected system, same as SELECT.
 
 To go back to stock behaviour, remove the two lines (or set 0 / false).
