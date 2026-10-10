@@ -23,5 +23,7 @@ with ES closed:
     "Game Options", **launches the game** instead.
   - Game Options are still reachable by holding a click on a game in the list.
   - Right click stays "back".
+  - On the system carousel the help bar shows only SELECT and NAVIGATION BAR
+    (SEARCH/RANDOM, RANDOM and CHOOSE are hidden).
 
 To go back to stock behaviour, remove the two lines (or set 0 / false).

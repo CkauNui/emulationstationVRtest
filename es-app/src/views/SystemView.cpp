@@ -892,6 +892,16 @@ void SystemView::render(const Transform4x4f& parentTrans)
 
 std::vector<HelpPrompt> SystemView::getHelpPrompts()
 {
+	// VR mouse mode: only the clickable essentials (SELECT, NAVIGATION BAR)
+	if (Settings::getInstance()->getBool("MouseSelectOnly"))
+	{
+		std::vector<HelpPrompt> vrPrompts;
+		vrPrompts.push_back(HelpPrompt(BUTTON_OK, _("SELECT"), [&] { ViewController::get()->goToGameList(getSelected()); }));
+		if (SystemData::IsManufacturerSupported)
+			vrPrompts.push_back(HelpPrompt("b", _("NAVIGATION BAR"), [&] { showNavigationBar(); }));
+		return vrPrompts;
+	}
+
 	std::vector<HelpPrompt> prompts = mCarousel.getHelpPrompts();
 
 	prompts.push_back(HelpPrompt(BUTTON_OK, _("SELECT"), [&] {ViewController::get()->goToGameList(getSelected()); }));
