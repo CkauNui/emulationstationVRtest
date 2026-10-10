@@ -43,6 +43,9 @@ enum class CarouselType : unsigned int
 class CarouselItemTemplate : public GuiComponent
 {
 public:
+	// System view: a click without drag enters the system even in VR (MouseSelectOnly) mode
+	void setClickAlwaysEnters(bool value) { mClickAlwaysEnters = value; }
+
 	CarouselItemTemplate(const std::string& name, Window* window);
 
 	void loadFromString(const std::string& xml, std::map<std::string, std::string>* map = nullptr);
@@ -170,6 +173,7 @@ private:
 
 	// Mouse support
 	int				mPressedCursor;
+	bool			mClickAlwaysEnters = false;
 	Vector2i		mPressedPoint;	
 
 	unsigned int	mColor;

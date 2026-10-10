@@ -998,6 +998,7 @@ void  SystemView::getViewElements(const std::shared_ptr<ThemeData>& theme)
 				carouselNative->setThemedContext("logo", "logoText", "systemcarousel", "carousel", CarouselType::HORIZONTAL, CarouselImageSource::IMAGE);
 				carouselNative->setCursorChangedCallback([this](CursorState state) { onCursorChanged(state); });
 				
+				carouselNative->setClickAlwaysEnters(true);
 				mCarousel.attach(carouselNative);
 			}
 						
