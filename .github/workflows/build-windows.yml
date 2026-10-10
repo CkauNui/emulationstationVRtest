@@ -30,7 +30,9 @@ jobs:
 
       - name: Build
         shell: pwsh
-        run: cmake --build build --config Release --parallel
+        # ES compiles with a very strict warning level (tens of thousands of lines, GitHub truncates the log),
+        # so only errors are printed: the real failure, if any, is then visible at the end of this step.
+        run: cmake --build build --config Release --parallel -- "/nologo" "/clp:ErrorsOnly"
 
       - name: Collect emulationstation.exe
         shell: pwsh
