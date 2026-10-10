@@ -750,7 +750,14 @@ bool InputManager::parseEvent(const SDL_Event& ev, Window* window)
 	case SDL_MOUSEBUTTONUP:
 		if (!getGunManager()->isReplacingMouse())
 			if (!window->processMouseButton(ev.button.button, ev.type == SDL_MOUSEBUTTONDOWN, ev.button.x, ev.button.y))
+			{
+				// MouseSelectOnly : an unhandled left click must not turn into BUTTON_OK (= launch), only Enter / OK does.
+				// Right click (back) is kept.
+				if (ev.button.button == 1 && Settings::getInstance()->getBool("MouseSelectOnly"))
+					return true;
+
 				window->input(getInputConfigByDevice(DEVICE_MOUSE), Input(DEVICE_MOUSE, TYPE_BUTTON, ev.button.button, ev.type == SDL_MOUSEBUTTONDOWN, false));
+			}
 
 		return true;
 

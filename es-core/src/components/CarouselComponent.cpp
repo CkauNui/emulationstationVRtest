@@ -888,7 +888,7 @@ bool CarouselComponent::onMouseClick(int button, bool pressed, int x, int y)
 			onCursorChanged(CursorState::CURSOR_STOPPED);
 		}
 
-		if (mPressedCursor == mCursor)
+		if (mPressedCursor == mCursor && !Settings::getInstance()->getBool("MouseSelectOnly"))
 			InputManager::getInstance()->sendMouseClick(mWindow, 1);
 	}
 

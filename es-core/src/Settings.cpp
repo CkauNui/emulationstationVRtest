@@ -130,6 +130,7 @@ void Settings::setDefaults()
 	mIntMap.clear();
 
 	mBoolMap["BackgroundJoystickInput"] = false;
+	mBoolMap["MouseSelectOnly"] = false; // VR/laser-pointer mode: a mouse click only selects, it never launches (launch with Enter / OK button)
 	mBoolMap["ParseGamelistOnly"] = false;
 	mBoolMap["ShowHiddenFiles"] = false;
 	mBoolMap["ShowParentFolder"] = true;
@@ -218,6 +219,7 @@ void Settings::setDefaults()
 	
 	mIntMap["ScreenSaverTime"] = Settings::_ScreenSaverTime;
 	mIntMap["FpsLimit"] = 0;
+	mIntMap["MouseWheelStepMs"] = 0; // 0 = off. >0 : at most one list step per N ms, whatever the wheel delta (VR sticks emulating a wheel)
 	mIntMap["AntiAliasing"] = 0;
 	mIntMap["ScraperResizeWidth"] = 640;
 	mIntMap["ScraperResizeHeight"] = 0;

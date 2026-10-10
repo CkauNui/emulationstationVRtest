@@ -1593,7 +1593,7 @@ bool ImageGridComponent<T>::onMouseClick(int button, bool pressed, int x, int y)
 			auto dragging = mIsDragging;
 			mIsDragging = false;
 
-			if (!dragging && btnDownCursor == mCursor)
+			if (!dragging && btnDownCursor == mCursor && !Settings::getInstance()->getBool("MouseSelectOnly"))
 				InputManager::getInstance()->sendMouseClick(mWindow, 1);
 		}
 

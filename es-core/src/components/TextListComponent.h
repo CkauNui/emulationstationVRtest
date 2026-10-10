@@ -879,7 +879,7 @@ bool TextListComponent<T>::onMouseClick(int button, bool pressed, int x, int y)
 			mPressedPoint = Vector2i(-1, -1);
 			mTimeHoldingButton = -1;
 
-			if (row == mHotRow && mCursor == row)
+			if (row == mHotRow && mCursor == row && !Settings::getInstance()->getBool("MouseSelectOnly"))
 				InputManager::getInstance()->sendMouseClick(mWindow, 1);
 		}
 

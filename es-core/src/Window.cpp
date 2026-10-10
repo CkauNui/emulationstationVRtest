@@ -17,6 +17,7 @@
 #include <SDL_events.h>
 #include "ThemeData.h"
 #include <mutex>
+#include <chrono>
 #include "components/AsyncNotificationComponent.h"
 #include "components/ControllerActivityComponent.h"
 #include "components/BatteryIndicatorComponent.h"
@@ -1362,6 +1363,22 @@ void Window::processMouseWheel(int delta)
 	GuiComponent* gui = peekGui();
 	if (!gui)
 		return;
+
+	// VR / laser-pointer streamers emulate the wheel from a thumbstick and flood us with events.
+	// With MouseWheelStepMs > 0, every wheel event is reduced to a single step (sign only),
+	// and steps are accepted at most once per MouseWheelStepMs milliseconds.
+	int wheelStepMs = Settings::getInstance()->getInt("MouseWheelStepMs");
+	if (wheelStepMs > 0 && delta != 0)
+	{
+		static std::chrono::steady_clock::time_point lastWheelStep;
+
+		auto now = std::chrono::steady_clock::now();
+		if (std::chrono::duration_cast<std::chrono::milliseconds>(now - lastWheelStep).count() < wheelStepMs)
+			return;
+
+		lastWheelStep = now;
+		delta = delta > 0 ? 1 : -1;
+	}
 
 	auto hits = hitTest(mLastMousePoint.x(), mLastMousePoint.y());
 
